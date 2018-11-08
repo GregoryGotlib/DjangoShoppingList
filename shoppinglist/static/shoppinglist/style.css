@@ -1,0 +1,11 @@
+body{
+    background-image:url("images/back.png"); 
+}
+
+.navbar-brand{
+    font-family: 'Charmonman', cursive;
+}
+
+.striker{
+    text-decoration: line-throug;
+}

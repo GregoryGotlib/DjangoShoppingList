@@ -1,0 +1,64 @@
+<!--Loads base web syles-->
+{% extends 'shoppinglist/base.html' %}
+
+{% block content %}
+    <!--Pops message-->
+    {% if messages %}
+        {% for msg in messages %}
+         <div class="alert alert-warning alert-dismisabble" role="alert">
+             <button class="close" data-dismiss="alera">
+                 <small><sup>x</sup></small>
+             </button>
+             {{ msg }}
+         </div>
+        {% endfor %}
+    {% endif %}
+    
+
+
+    
+            
+    {% if all_items %}
+    <table class="table table-bordered" style="border-color: black" >
+        <thead class="thead-dark" >
+              <tr>
+                <th>Product Name</th>
+                <th>Status</th>
+                <th> </th>
+              </tr>
+        </thead>
+        {% for product in all_items %}
+        <tbody style="border-color: black">
+        {% if product.added %}
+                <tr class="table-success"> <!--Change color on added item!-->
+                  <td style="border-color: black; border:2px solid; font-weight: bolder ; text-decoration-line: line-through">
+                  <a href="{% url 'edit' product.id %}">{{ product.item }}</a></td>
+
+                  <td style="border-color: black; border:2px solid; font-weight: bolder">
+                  <a href="{% url 'uncross' product.id %}">Remove</a>
+                  </td>
+
+                  <td style="border-color: black; border:2px solid; font-weight: bolder; text-align: center ">
+                  <a href="{% url 'delete' product.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+       
+        {% else %}
+              <tr>
+                <td style="border-color: black; border:2px solid; font-weight: bolder">
+                <a href="{% url 'edit' product.id %}">{{ product.item }}</a></td>
+
+                <td style="border-color: black; border:2px solid; font-weight: bolder">
+                <a href="{% url 'cross_off' product.id %}">Add</a></td>
+
+                <td style="border-color: black; border:2px solid; font-weight: bolder; text-align: center">
+                <a href="{% url 'delete' product.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+
+        {% endif %}
+
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+{% endblock %}
